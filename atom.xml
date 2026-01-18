@@ -6,7 +6,7 @@
   <link href="https://uint8.moe.page/atom.xml" rel="self"/>
   
   <link href="https://uint8.moe.page/"/>
-  <updated>2025-10-03T15:22:02.827Z</updated>
+  <updated>2026-01-18T07:21:00.898Z</updated>
   <id>https://uint8.moe.page/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>inline 对于函数内联优化有效吗？</title>
+    <link href="https://uint8.moe.page/2026/01/18/Does-inline-effective/"/>
+    <id>https://uint8.moe.page/2026/01/18/Does-inline-effective/</id>
+    <published>2026-01-18T03:14:42.000Z</published>
+    <updated>2026-01-18T07:21:00.898Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;现代 C++ 中 &lt;code&gt;inline&lt;/code&gt; 对于指示函数内联优化，有效吗？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;It depends!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;简短地说，这取决于编译器。&lt;/p&gt;
+&lt;p&gt;对于 GCC，一定程度上是有效的；而对于 Clang，基本上是无效的。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>KDE 配置记录</title>
