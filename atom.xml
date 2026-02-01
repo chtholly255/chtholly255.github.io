@@ -6,7 +6,7 @@
   <link href="https://uint8.moe.page/atom.xml" rel="self"/>
   
   <link href="https://uint8.moe.page/"/>
-  <updated>2026-01-18T07:21:00.898Z</updated>
+  <updated>2026-02-01T00:39:18.133Z</updated>
   <id>https://uint8.moe.page/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://uint8.moe.page/2026/01/18/Is-inline-effective/"/>
     <id>https://uint8.moe.page/2026/01/18/Is-inline-effective/</id>
     <published>2026-01-18T03:14:42.000Z</published>
-    <updated>2026-01-18T07:21:00.898Z</updated>
+    <updated>2026-02-01T00:39:18.133Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -33,6 +33,10 @@
     
     
     
+    
+    <category term="技术" scheme="https://uint8.moe.page/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="C++" scheme="https://uint8.moe.page/tags/C/"/>
     
   </entry>
   
