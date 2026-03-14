@@ -28,7 +28,7 @@
 <meta property="og:description" content="现代 C++ 中 inline 对于指示函数内联优化，有效吗？  It depends! 简短地说，这取决于编译器。 对于 GCC，一定程度上是有效的；而对于 Clang，基本上是无效的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-18T03:14:42.000Z">
-<meta property="article:modified_time" content="2026-02-01T00:39:18.133Z">
+<meta property="article:modified_time" content="2026-03-14T14:07:53.953Z">
 <meta property="article:author" content="unsigned char">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="技术">
@@ -137,7 +137,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%EF%BC%8C%E7%A9%B6%E7%AB%9F%E5%86%99%E4%B8%8D%E5%86%99-inline-%E5%91%A2%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">那么，究竟写不写 inline 呢？</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%EF%BC%8C%E7%A9%B6%E7%AB%9F%E5%86%99%E4%B8%8D%E5%86%99-inline-%E5%91%A2%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">那么，究竟写不写 inline 呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">补充：关于相关属性</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-01 08:39:18" itemprop="dateModified" datetime="2026-02-01T08:39:18+08:00">2026-02-01</time>
+      <time title="修改时间：2026-03-14 22:07:53" itemprop="dateModified" datetime="2026-03-14T22:07:53+08:00">2026-03-14</time>
     </span>
 
   
@@ -336,8 +336,17 @@
 <p>至于为什么会是这样，我猜测这与 GCC 和 Clang 的历史有关。Clang 诞生于 2007 年，它作为 C++ 编译器成熟时正是 C++11 的年代，所以其设计上就是一个完全的现代 C++ 编译器；而 GCC 诞生时连 C++98 都没有，考虑到它继承了相当多的 90 年代的代码，在表现上更像是传统的 C++ 编译器也是完全合理的</p>
 <h3 id="那么，究竟写不写-inline-呢？"><a href="#那么，究竟写不写-inline-呢？" class="headerlink" title="那么，究竟写不写 inline 呢？"></a>那么，究竟写不写 <code>inline</code> 呢？</h3><p><del>可写可不写。</del></p>
 <p>不过，严谨地说，对于 OIer（编译器只有 GCC），卡常的时候或许写上比较好？（不过函数调用的这一点开销恐怕对于整体是微乎其微吧，况且即便是内联了，也不一定真的会提升性能）</p>
-<p>至于工程上，如果使用 GCC 的话，或许应当按照 C++ 之父 Bjarne Stroustrup 的建议，测试之后再决定？</p>
+<p><del>至于工程上，如果使用 GCC 的话，或许应当按照 C++ 之父 Bjarne Stroustrup 的建议，测试之后再决定？</del>修正：不推荐依赖 GCC 的 <code>inline</code> 语义（这会导致代码难以移植），如果需要，应当尽可能考虑下面的几个属性</p>
+<blockquote>
+<p>评论中有提到提到使用宏，但是感觉好像这样带来的问题更多（</p>
+</blockquote>
 <p><del>反正我不写，因为懒</del></p>
+<hr>
+<h2 id="补充：关于相关属性"><a href="#补充：关于相关属性" class="headerlink" title="补充：关于相关属性"></a>补充：关于相关属性</h2><ul>
+<li><code>gnu::always_inline</code> 无论 GCC 和 Clang 都会指示内联（至少在文档中是这样说的）。在 GCC 上对于递归函数使用会导致报错，在 Clang 上应用于递归函数则会被忽略</li>
+<li><code>gnu::gnu_inline</code> 具有特殊语义，参见 <a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Common-Attributes.html#index-gnu_005finline">GCC 文档</a> 和 <a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/AttributeReference.html#gnu-inline">Clang 文档</a>。对于当前的测试程序，使用 <code>gnu::gnu_inline</code> 会导致对于递归函数既不内联也不生成独立函数的汇编（编译器将其视为外部函数）</li>
+<li><code>gnu::flatten</code> 将该函数中所有<strong>调用的</strong>函数（尽可能地）内联。对于 Clang 仍然不会触发递归展开（对于上述代码的 <code>main</code> 函数使用 <code>gnu::flatten</code> 属性，GCC 似乎进行了略微多一层的递归展开，而 Clang 生成代码几乎没有差异）</li>
+</ul>
 <hr>
 <p>吐槽：千问分析汇编代码完全在胡说八道，相比之下 Gemini 好很多</p>
 <p><del>为什么御三家编译器中缺 MSVC，因为我这里没有</del></p>
