@@ -28,7 +28,7 @@
 <meta property="og:description" content="现代 C++ 中 inline 对于指示函数内联优化，有效吗？  It depends! 简短地说，这取决于编译器。 对于 GCC，一定程度上是有效的；而对于 Clang，基本上是无效的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-18T03:14:42.000Z">
-<meta property="article:modified_time" content="2026-03-14T14:07:53.953Z">
+<meta property="article:modified_time" content="2026-03-14T14:16:45.813Z">
 <meta property="article:author" content="unsigned char">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="技术">
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-14 22:07:53" itemprop="dateModified" datetime="2026-03-14T22:07:53+08:00">2026-03-14</time>
+      <time title="修改时间：2026-03-14 22:16:45" itemprop="dateModified" datetime="2026-03-14T22:16:45+08:00">2026-03-14</time>
     </span>
 
   
@@ -342,7 +342,8 @@
 </blockquote>
 <p><del>反正我不写，因为懒</del></p>
 <hr>
-<h2 id="补充：关于相关属性"><a href="#补充：关于相关属性" class="headerlink" title="补充：关于相关属性"></a>补充：关于相关属性</h2><ul>
+<h2 id="补充：关于相关属性"><a href="#补充：关于相关属性" class="headerlink" title="补充：关于相关属性"></a>补充：关于相关属性</h2><p>（GCC 和 Clang 都可以用）</p>
+<ul>
 <li><code>gnu::always_inline</code> 无论 GCC 和 Clang 都会指示内联（至少在文档中是这样说的）。在 GCC 上对于递归函数使用会导致报错，在 Clang 上应用于递归函数则会被忽略</li>
 <li><code>gnu::gnu_inline</code> 具有特殊语义，参见 <a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Common-Attributes.html#index-gnu_005finline">GCC 文档</a> 和 <a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/AttributeReference.html#gnu-inline">Clang 文档</a>。对于当前的测试程序，使用 <code>gnu::gnu_inline</code> 会导致对于递归函数既不内联也不生成独立函数的汇编（编译器将其视为外部函数）</li>
 <li><code>gnu::flatten</code> 将该函数中所有<strong>调用的</strong>函数（尽可能地）内联。对于 Clang 仍然不会触发递归展开（对于上述代码的 <code>main</code> 函数使用 <code>gnu::flatten</code> 属性，GCC 似乎进行了略微多一层的递归展开，而 Clang 生成代码几乎没有差异）</li>
