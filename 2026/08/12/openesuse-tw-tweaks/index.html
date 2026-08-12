@@ -20,24 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"uint8.moe.page","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"default"},"fold":{"enable":true,"height":800},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="unsigned char&#39;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="蒟蒻のBlog">
-<meta property="og:url" content="https://uint8.moe.page/tags/XCPC/index.html">
+    <meta name="description" content="折腾openSUSE Tumbleweed（KDE 桌面）的记录，包括：  KDE&#x2F;SDDM Wayland 配置 fcitx5 + RIME TTY 字体配置（尚未完全解决） zram 配置 rEFInd 与 GRUB 字体配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="折腾 openSUSE Tumbleweed">
+<meta property="og:url" content="https://uint8.moe.page/2026/08/12/openesuse-tw-tweaks/index.html">
 <meta property="og:site_name" content="蒟蒻のBlog">
-<meta property="og:description" content="unsigned char&#39;s blog">
+<meta property="og:description" content="折腾openSUSE Tumbleweed（KDE 桌面）的记录，包括：  KDE&#x2F;SDDM Wayland 配置 fcitx5 + RIME TTY 字体配置（尚未完全解决） zram 配置 rEFInd 与 GRUB 字体配置">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-12T06:20:07.000Z">
+<meta property="article:modified_time" content="2026-08-12T14:09:23.385Z">
 <meta property="article:author" content="unsigned char">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="颓废">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://uint8.moe.page/tags/XCPC/">
+<link rel="canonical" href="https://uint8.moe.page/2026/08/12/openesuse-tw-tweaks/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/XCPC/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://uint8.moe.page/2026/08/12/openesuse-tw-tweaks/","path":"2026/08/12/openesuse-tw-tweaks/","title":"折腾 openSUSE Tumbleweed"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: XCPC | 蒟蒻のBlog</title>
+<title>折腾 openSUSE Tumbleweed | 蒟蒻のBlog</title>
   
 
 
@@ -119,7 +124,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -132,6 +137,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KDE-SDDM-Wayland"><span class="nav-number">1.</span> <span class="nav-text">KDE&#x2F;SDDM Wayland</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fcitx5-RIME"><span class="nav-number">2.</span> <span class="nav-text">fcitx5 + RIME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TTY-%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE%EF%BC%88%E5%B0%9A%E6%9C%AA%E5%AE%8C%E5%85%A8%E8%A7%A3%E5%86%B3%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">TTY 字体配置（尚未完全解决）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zram-%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">zram 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rEFInd-%E4%B8%8E-GRUB"><span class="nav-number">5.</span> <span class="nav-text">rEFInd 与 GRUB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">字体配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-number">7.</span> <span class="nav-text">杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#zypper-%E4%B8%8E-PackageKit-%E5%86%B2%E7%AA%81"><span class="nav-number">7.1.</span> <span class="nav-text">zypper 与 PackageKit 冲突</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E6%A0%87%E5%9B%9E%E9%80%80%E9%97%AE%E9%A2%98%EF%BC%88%E5%B0%9A%E6%9C%AA%E5%AE%8C%E5%85%A8%E8%A7%A3%E5%86%B3%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">图标回退问题（尚未完全解决）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -191,51 +197,123 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">XCPC
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uint8.moe.page/2026/08/12/openesuse-tw-tweaks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/user_avatar.webp">
+      <meta itemprop="name" content="unsigned char">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒟蒻のBlog">
+      <meta itemprop="description" content="unsigned char's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="折腾 openSUSE Tumbleweed | 蒟蒻のBlog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          折腾 openSUSE Tumbleweed
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+
+      <time title="创建时间：2026-08-12 14:20:07 / 修改时间：22:09:23" itemprop="dateCreated datePublished" datetime="2026-08-12T14:20:07+08:00">2026-08-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>折腾openSUSE Tumbleweed（KDE 桌面）的记录，包括：</p>
+<ul>
+<li>KDE&#x2F;SDDM Wayland 配置</li>
+<li>fcitx5 + RIME</li>
+<li>TTY 字体配置（尚未完全解决）</li>
+<li>zram 配置</li>
+<li>rEFInd 与 GRUB</li>
+<li>字体配置</li>
+</ul>
+<span id="more"></span>
+<hr>
+<p>再也无法忍受 Gnome 糟糕的分数缩放支持了！于是切换到了 KDE，顺带也从 Fedora 换到了 openSUSE Tumbleweed。openSUSE 相比于 Fedora 更新更频繁，大部分软件包更新，但是在技术路线上略微保守，同时用户数量也少于 Fedora (Red Hat 系)</p>
+<p>※参见 <a target="_blank" rel="noopener" href="https://bangumi.tv/group/topic/466306">bgm 帖子</a></p>
+<p>※还有一些美化相关的东西在<a href="/2026/07/15/KDE-beautify/">这篇文章中</a></p>
+<h3 id="KDE-SDDM-Wayland"><a href="#KDE-SDDM-Wayland" class="headerlink" title="KDE&#x2F;SDDM Wayland"></a>KDE&#x2F;SDDM Wayland</h3><p><del>openSUSE Tumbleweed 默认安装并没有使用 Wayland（明明 KDE X11 都快要被移除了，甚至 Leap 都切换到了 Wayland 的……）</del></p>
+<p><del>安装 <code>plasma6-session-wayland</code> 可以启用 KDE Wayland 会话</del> 现在似乎默认就是 Wayland 了，但是 SDDM 仍然运行在 X11 下</p>
+<p>安装 <code>sddm-config-wayland</code> 可以让 SDDM 也使用 Wayland。但是仅仅这样做重启后会直接进 tty，应当先 <code>systemctl disable display-manager-legacy.service</code> 并 <code>systemctl enable sddm.service</code></p>
+<h3 id="fcitx5-RIME"><a href="#fcitx5-RIME" class="headerlink" title="fcitx5 + RIME"></a>fcitx5 + RIME</h3><p><em>TODO</em></p>
+<h3 id="TTY-字体配置（尚未完全解决）"><a href="#TTY-字体配置（尚未完全解决）" class="headerlink" title="TTY 字体配置（尚未完全解决）"></a>TTY 字体配置（尚未完全解决）</h3><p><em>TODO</em></p>
+<h3 id="zram-配置"><a href="#zram-配置" class="headerlink" title="zram 配置"></a>zram 配置</h3><p><em>TODO</em></p>
+<h3 id="rEFInd-与-GRUB"><a href="#rEFInd-与-GRUB" class="headerlink" title="rEFInd 与 GRUB"></a>rEFInd 与 GRUB</h3><p><em>TODO</em></p>
+<h3 id="字体配置"><a href="#字体配置" class="headerlink" title="字体配置"></a>字体配置</h3><p><em>TODO</em></p>
+<h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><h4 id="zypper-与-PackageKit-冲突"><a href="#zypper-与-PackageKit-冲突" class="headerlink" title="zypper 与 PackageKit 冲突"></a><code>zypper</code> 与 PackageKit 冲突</h4><p><code>zypper</code> 似乎经常和 PackageKit 冲突：PackageKit 在后台自启动，锁定了 <code>libzypp</code>，导致 <code>zypper</code> 无法使用。如果慢慢等待 PackageKit 自动退出，往往需要好几分钟。临时的解决方案是暂时停止 <code>packagekit.service</code>（用到时需要再次手动启动，否则 KDE Discover 等可能会出错；重启后恢复）。如果不使用 Discover 图形化管理 rpm 包且不需要更新提示，则可以卸载 <code>discover6-backend-packagekit</code> 与 <code>discover6-notifier</code> 并 <code>addlock</code></p>
+<h3 id="图标回退问题（尚未完全解决）"><a href="#图标回退问题（尚未完全解决）" class="headerlink" title="图标回退问题（尚未完全解决）"></a>图标回退问题（尚未完全解决）</h3><p>部分使用内置图标的 Qt 应用在内置图标无法覆盖的情况下（如文件选择器），会直接 fallback 到 breeze (light)，这样在暗色模式下图标就难以辨别了。一个简单的 workaround 是 <code>ln -s &lt;需要的暗色图标主题路径&gt; ~/.local/share/icons/breeze</code></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-10-27T14:23:18+08:00"
-              content="2024-10-27">
-          10-27
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/10/27/CCPC-2024-JN/" itemprop="url">
-            <span itemprop="name">CCPC 2024 JN 打铁记</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E9%A2%93%E5%BA%9F/" rel="tag"># 颓废</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/15/KDE-beautify/" rel="prev" title="KDE 配置记录">
+                  <i class="fa fa-angle-left"></i> KDE 配置记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
   </div>
   
   
-  
-
 </div>
   </main>
 

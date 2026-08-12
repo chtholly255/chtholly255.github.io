@@ -678,6 +678,12 @@ kbd {
 figure.highlight {
   overflow: auto;
   position: relative;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  figure.highlight {
+    color-scheme: dark;
+  }
 }
 figure.highlight pre {
   border: 0;
@@ -1366,7 +1372,7 @@ pre code {
   transition: all 0.2s ease-in-out;
 }
 .links-of-author a::before {
-  background: #7fc6ff;
+  background: #ff06ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2554,7 +2560,6 @@ mark.search-keyword {
   color: #ff2a2a;
   font-weight: bold;
 }
-mjx-container[jax='CHTML'][display='true'],
 .has-jax {
   overflow: auto hidden;
 }
