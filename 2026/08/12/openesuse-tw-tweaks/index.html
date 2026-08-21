@@ -28,7 +28,7 @@
 <meta property="og:description" content="折腾 openSUSE Tumbleweed（KDE 桌面）的记录，包括：  KDE&#x2F;SDDM Wayland 配置 fcitx5 + RIME TTY 字体配置（尚未完全解决） zram 配置 rEFInd 与 GRUB 字体配置">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-12T06:20:07.000Z">
-<meta property="article:modified_time" content="2026-08-21T13:33:18.693Z">
+<meta property="article:modified_time" content="2026-08-21T13:49:53.548Z">
 <meta property="article:author" content="unsigned char">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="技术">
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-08-21 21:33:18" itemprop="dateModified" datetime="2026-08-21T21:33:18+08:00">2026-08-21</time>
+      <time title="修改时间：2026-08-21 21:49:53" itemprop="dateModified" datetime="2026-08-21T21:49:53+08:00">2026-08-21</time>
     </span>
 
   
@@ -283,7 +283,11 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.local/share/fcitx5/rime/ext_dict.dict.yaml</span></span><br><span class="line"><span class="comment"># Rime dictionary</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">ext_dict</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="attr">sort:</span> <span class="string">by_weight</span></span><br><span class="line"><span class="attr">use_preset_vocabulary:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 将扩展词库放在配置目录下的 dict 目录下</span></span><br><span class="line"><span class="attr">import_tables:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">luna_pinyin</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">dict/moegirl</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">dict/zhwiki</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="TTY-字体配置（尚未完全解决）"><a href="#TTY-字体配置（尚未完全解决）" class="headerlink" title="TTY 字体配置（尚未完全解决）"></a>TTY 字体配置（尚未完全解决）</h3><p><em>TODO</em></p>
-<h3 id="zram-配置"><a href="#zram-配置" class="headerlink" title="zram 配置"></a>zram 配置</h3><p><em>TODO</em></p>
+<h3 id="zram-配置"><a href="#zram-配置" class="headerlink" title="zram 配置"></a>zram 配置</h3><p>安装 <code>systemd-zram-service</code> 即可使用。默认大小与物理内存相同，可以通过修改 <code>/sbin/zramswapon</code> 调节。</p>
+<p>默认的配置有点问题：系统 swap 积极性极低（与 swap 至磁盘相同）。解决方案是通过 <code>sysctl</code> 设置 <code>vm.page-cluster=0 vm.swappiness=180 vm.watermark_boost_factor=0 vm.watermark_scale_factor=125</code>（这是 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Zram#%E4%BC%98%E5%8C%96_zram_%E4%B8%8A%E7%9A%84_swap">ArchWiki</a> 的推荐值）</p>
+<p>我直接修改了 <code>zramswap.service</code>（使用 <code>systemctl edit</code>），在启动时自动设置这些参数，并在退出时自动设置回去</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">ExecStartPost</span>=/usr/sbin/sysctl -w vm.page-cluster=<span class="number">0</span> \</span><br><span class="line"><span class="attr">vm.swappiness</span>=<span class="number">180</span> \</span><br><span class="line"><span class="attr">vm.watermark_boost_factor</span>=<span class="number">0</span> \</span><br><span class="line"><span class="attr">vm.watermark_scale_factor</span>=<span class="number">125</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这应该是 openSUSE 的默认值</span></span><br><span class="line"><span class="attr">ExecStopPost</span>=-/usr/sbin/sysctl -w vm.page-cluster=<span class="number">3</span> \</span><br><span class="line"><span class="attr">vm.swappiness</span>=<span class="number">60</span> \</span><br><span class="line"><span class="attr">vm.watermark_boost_factor</span>=<span class="number">15000</span> \</span><br><span class="line"><span class="attr">vm.watermark_scale_factor</span>=<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="rEFInd-与-GRUB"><a href="#rEFInd-与-GRUB" class="headerlink" title="rEFInd 与 GRUB"></a>rEFInd 与 GRUB</h3><p><em>TODO</em></p>
 <h3 id="字体配置"><a href="#字体配置" class="headerlink" title="字体配置"></a>字体配置</h3><p><em>TODO</em></p>
 <h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><h4 id="zypper-与-PackageKit-冲突"><a href="#zypper-与-PackageKit-冲突" class="headerlink" title="zypper 与 PackageKit 冲突"></a><code>zypper</code> 与 PackageKit 冲突</h4><p><code>zypper</code> 似乎经常和 PackageKit 冲突：PackageKit 在后台自启动，锁定了 <code>libzypp</code>，导致 <code>zypper</code> 无法使用。如果慢慢等待 PackageKit 自动退出，往往需要好几分钟。临时的解决方案是暂时停止 <code>packagekit.service</code>（用到时需要再次手动启动，否则 KDE Discover 等可能会出错；重启后恢复）。如果不使用 Discover 图形化管理 rpm 包且不需要更新提示，则可以卸载 <code>discover6-backend-packagekit</code> 与 <code>discover6-notifier</code> 并 <code>addlock</code></p>
